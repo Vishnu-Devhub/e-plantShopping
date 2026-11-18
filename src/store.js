@@ -6,4 +6,4 @@ const store = configureStore({
         cart: cartReducer, // state.cart is managed by cartReducer
     },
 });
-export default store
+export default store; // Used by <Provider> in main.jsx
