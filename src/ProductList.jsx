@@ -11,6 +11,13 @@ function ProductList({ onHomeClick }) {
 
     const dispatch = useDispatch();
 
+    const CartItems = useSelector(state => state.cart.items); // Cart items from the Redux store
+
+    // Total number of plants in the cart, shown on the cart icon
+    const calculateTotalQuantity = () => {
+        return CartItems ? CartItems.reduce((total, item) => total + item.quantity, 0) : 0;
+    };
+
     const handleAddToCart = (product) => {
         dispatch(addItem(product)); // Send the plant to the Redux cart
         setAddedToCart((prevState) => ({
