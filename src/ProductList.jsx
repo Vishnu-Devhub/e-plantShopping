@@ -18,6 +18,13 @@ function ProductList({ onHomeClick }) {
         return CartItems ? CartItems.reduce((total, item) => total + item.quantity, 0) : 0;
     };
 
+    // When a plant is removed from the cart, enable its Add to Cart button again
+    useEffect(() => {
+        const updated = {};
+        CartItems.forEach(item => { updated[item.name] = true; });
+        setAddedToCart(updated);
+    }, [CartItems]);
+
     const handleAddToCart = (product) => {
         dispatch(addItem(product)); // Send the plant to the Redux cart
         setAddedToCart((prevState) => ({
@@ -256,6 +263,7 @@ function ProductList({ onHomeClick }) {
 
     const handleHomeClick = (e) => {
         e.preventDefault();
+        setShowCart(false); // Close the cart view
         onHomeClick();
     };
 
